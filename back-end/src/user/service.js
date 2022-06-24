@@ -10,7 +10,7 @@ async function getById(id) {
 }
 
 async function addUser(body, hashPassword) {
-    const { name, email, fullName } = body;
+    const { email, fullName } = body;
 
     const user = new User({
         fullName,
