@@ -44,8 +44,9 @@ async function login(req, res) {
         if (!validPassword) return res.status(400).send('invalid pass');
 
         const token = jwt.sign({ _id: user._id, name: user.fullName, email: user.email }, TOKEN_SECRET);
-        console.log(user);
-        return res.header('auth-token', token).send({ message: 'Logged in successfully', userName: user, userId: user._id, userToken: token });
+        return res
+            .header('auth-token', token)
+            .send({ message: 'Logged in successfully', userName: user.fullName, userId: user._id, userToken: token, userContacts: user.contacts ? user.contacts : null });
     } catch (error) {
         console.log(error);
         res.status(500).send(error);

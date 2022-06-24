@@ -1,11 +1,10 @@
-const { addContact } = require('./service');
+const { addContactService, getContactsById } = require('./service');
 const Contact = require('../model/Contact');
 const User = require('../model/User');
 
-async function add(req, res) {
+async function addContact(req, res) {
     try {
-        const newContact = await addContact(req.body);
-        console.log('newContact =>', newContact);
+        const newContact = await addContactService(req.body);
 
         const updateUser = await User.updateOne(
             {
@@ -17,15 +16,64 @@ async function add(req, res) {
                 },
             }
         );
-        console.log('updateUser =>', updateUser);
 
-        return res.status(200).send(newContact); // 200
+        return res.status(200).send(newContact);
     } catch (error) {
         console.log(error);
         res.status(500).send(error);
     }
 }
 
+async function getContacts(req, res) {
+    try {
+        if (req.query.id) {
+            const id = req.query.id;
+            const result = await getContactsById(id);
+            return res.send(result);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function deleteContact(req, res) {
+    try {
+        const contact = await Contact.findOne({ _id: req.query.id });
+        if (!contact) console.log(404);
+
+        const deleteResult = await contact.remove();
+
+        await User.updateOne({ _id: contact.user }, { $pull: { contacts: contact._id } });
+
+        return res.send('Contact removed');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function updateContact(req, res) {
+    try {
+        const contact = await Contact.findByIdAndUpdate(
+            { _id: req.query.id },
+            {
+                $set: {
+                    full_name: req.body.full_name,
+                    email: req.body.email,
+                    phone: req.body.phone_number,
+                    relationship_status: req.body.relationship_status,
+                    location: req.body.location,
+                },
+            }
+        );
+        return res.send('Contact Updated');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
-    add,
+    addContact,
+    getContacts,
+    deleteContact,
+    updateContact,
 };
