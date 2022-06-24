@@ -4,28 +4,23 @@ const contactSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: true,
-        min: 3,
         max: 255,
     },
     phoneNumber: {
         type: String,
         required: true,
-        min: 6,
         max: 255,
     },
     relationshipStatus: {
         type: Number,
         required: true,
-        min: 6,
         max: 1024,
     },
     email: {
         type: String,
         required: true,
-        min: 6,
         max: 1024,
     },
-
     location: {
         type: {
             type: String,

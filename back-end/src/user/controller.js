@@ -1,4 +1,5 @@
 const { getUsers, addUser, getByEmail, getById } = require('./service');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || '';
@@ -42,9 +43,9 @@ async function login(req, res) {
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if (!validPassword) return res.status(400).send('invalid pass');
 
-        const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, TOKEN_SECRET);
-
-        return res.header('auth-token', token).send(token);
+        const token = jwt.sign({ _id: user._id, name: user.fullName, email: user.email }, TOKEN_SECRET);
+        console.log(user);
+        return res.header('auth-token', token).send({ message: 'Logged in successfully', userName: user, userId: user._id, userToken: token });
     } catch (error) {
         console.log(error);
         res.status(500).send(error);

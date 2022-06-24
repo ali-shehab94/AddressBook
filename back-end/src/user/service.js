@@ -1,8 +1,8 @@
 const User = require('../model/User');
+const Contact = require('../model/Contact');
 
 async function getUsers() {
-    return await User.find();
-    // return await Task.find().populate('user');
+    return await User.find().populate('contacts');
 }
 
 async function getById(id) {
