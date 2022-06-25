@@ -7,27 +7,26 @@ const SignInCard = () => {
     const [password, setPassword] = useState('');
     async function signInClick() {
         console.log('clicked');
+        console.log(email, password);
+        const res = await fetch(`http://localhost:4000/api/user/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password }),
+        });
+        const data = await res.json();
+        console.log('datat =>', data);
+        if (!data.error) {
+            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('userName', data.userName);
+            localStorage.setItem('userToken', data.userToken);
+            window.location.href = '/homepage';
+        } else {
+            alert('Wrong username or password');
+        }
+        return data.error;
     }
-    //     console.log(email, password);
-    //     const res = await fetch(`http://localhost:4000/api/user/auth/login`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ email: email, password: password }),
-    //     });
-    //     const data = await res.json();
-    //     console.log(data.status);
-    //     if (!data.error) {
-    //         localStorage.setItem('user_id', data.user.id);
-    //         localStorage.setItem('user_type', data.user.user_type == 1 ? 'admin' : 'user');
-    //         localStorage.setItem('access_token', data.authorisation.token);
-    //         window.location.href = '/homepage';
-    //     } else {
-    //         alert('Wrong username or password');
-    //     }
-    //     return data.error;
-    // }
 
     return (
         <div className='auth-card'>
