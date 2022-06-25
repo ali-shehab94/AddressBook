@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import { useNavigate } from 'react-router-dom';
 const Homepage = () => {
     const userId = localStorage.getItem('userId');
+    const userName = localStorage.getItem('userName');
     const navigate = useNavigate();
     const [contacts, setContacts] = useState([]);
 
@@ -25,7 +26,7 @@ const Homepage = () => {
     console.log('contacts =>', contacts);
     return (
         <div>
-            <Header userName={''} />
+            <Header userName={userName} pageTitle='Your Contacts' />
             <div className='body-wrapper'>
                 <SearchBar />
                 <h1>hi</h1>
@@ -35,6 +36,7 @@ const Homepage = () => {
                         return (
                             <Card
                                 key={contact._id}
+                                id={contact._id}
                                 name={contact.fullName}
                                 phone={contact.phoneNumber}
                                 email={contact.email}

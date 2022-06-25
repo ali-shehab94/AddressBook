@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import SignUpCard from '../components/SignUpCard';
+import { useState, useEffect } from 'react';
 const SignUp = () => {
     return (
         <div>
