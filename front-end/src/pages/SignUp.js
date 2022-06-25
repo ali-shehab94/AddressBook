@@ -1,17 +1,16 @@
 import Header from '../components/Header';
-import SignInCard from '../components/SignInCard';
-
-const SignIn = () => {
+import SignUpCard from '../components/SignUpCard';
+const SignUp = () => {
     return (
         <div>
-            <Header userName={'Sign in'} pageTitle={'Welcome to Yellow Contacts'} />
+            <Header userName={'Register'} pageTitle={'Welcome to Yellow Contacts'} />
             <div className='body-wrapper'>
                 <div className='signin-signup'>
-                    <SignInCard />
+                    <SignUpCard />
                 </div>
             </div>
         </div>
     );
 };
 
-export default SignIn;
+export default SignUp;
