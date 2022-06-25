@@ -6,6 +6,7 @@
 
 body{
   background-color: rgba(237, 240, 226, 0.871);
+  color: rgb(88, 39, 82);
 }
 
 .header {
@@ -23,12 +24,15 @@ body{
   align-items: center;
 
 }
+.header-content > h4 {
+  font-size: 30px;
+}
 
 .btn {
   background-color: rgb(127, 210, 85);
-  width: 120px;
+  width: 150px;
   height: 40px;
-
+  font-size: 15px;
   border-radius: 5px;
   color: white;
 }
@@ -68,7 +72,7 @@ Contact components*/
   border-radius: 25px;
   position: relative;
   padding: 25px 15px;
-  background-color: #81ecec;
+  background-color: #f8d77c;
   margin: 50px 10px;
   width: 450px;
   height: 250px;
@@ -80,7 +84,7 @@ Contact components*/
   border-radius: 25px 25px 0 0;
   height: 100px;
   width: 450px;
-  background-color: #00cec9;
+  background-color: #c8c4ba;
   position: absolute;
   top: 0;
   left: 0;
@@ -89,10 +93,9 @@ Contact components*/
 
 .name {
   font-size: 2em;
-  color: #2d3436;
   display: flex;
   flex: 1;
-  margin: 15% 20px 0;
+  margin: 13% 20px 0;
 }
 
 .card img {
@@ -107,12 +110,46 @@ Contact components*/
 }
 
 .bottom {
-  margin-top: 120px;
+  margin-top: 100px;
   height: 120px;
   width: 450px;
 }
 
 .info {
   margin: 10px 0;
-  color: #1a7e76;
+}
+
+.radio-container {
+  margin: 4px 0 4px 258px;
+  gap: 20px;
+  display: flex;
+}
+
+/* 
+===============================================================================================
+sign-in and sign-up */
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 550px;
+  width: 35%;
+  border: 1px solid black;
+  box-shadow: 11px 12px 13px 12px rgb(211, 210, 210);
+  border-radius: 5%;
+}
+
+.signin-signup {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 90px 0 90px 0;
+}
+
+.input-auth {
+  width: 70%;
+  height: 35px;
+  margin-bottom: 30px;
+  border-radius: 7px;
 }

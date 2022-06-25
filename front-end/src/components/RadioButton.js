@@ -1,11 +1,12 @@
 import React from 'react';
 
-function RadioButton({ type, value, name, text }) {
+const RadioButton = ({ value, name, text }) => {
     return (
         <div>
-            <input type='radio' value='Male' name='gender' /> {text}
+            <input type='radio' value={value} name={name} />
+            {text}
         </div>
     );
-}
+};
 
 export default RadioButton;

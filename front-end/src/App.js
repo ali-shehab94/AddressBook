@@ -1,24 +1,13 @@
-import Header from './components/Header';
-import SearchBar from './components/SearchBar';
-import Card from './components/Contact';
+import SignIn from './pages/SignIn';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
     return (
-        <div>
-            <Header />
-            <div className='body-wrapper'>
-                <SearchBar />
-                <h1>hi</h1>
-                <h2>isdvicsndiv</h2>
-                <div className='card-container'>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                </div>
-            </div>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<SignIn />} />
+                <Route path='/homepage' element={<SignIn />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

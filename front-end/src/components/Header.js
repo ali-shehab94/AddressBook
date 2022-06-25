@@ -1,16 +1,18 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Button from './Button';
 
-function Header({ userName, pageTitle }) {
+const Header = ({ userName, pageTitle }) => {
+    const location = useLocation();
     return (
         <div className='header'>
             <div className='header-content'>
-                <h4>user name{userName}</h4>
-                <h1>page title{pageTitle}</h1>
-                <Button />
+                <h4>{userName}</h4>
+                <h1>{pageTitle}</h1>
+                {location.pathname.includes('homepage') && <Button text='Add contact' />}
             </div>
         </div>
     );
-}
+};
 
 export default Header;
