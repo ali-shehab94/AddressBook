@@ -9,9 +9,38 @@ const Card = ({ name, phone, email, relationship, location, id }) => {
         relationship = "It's complicated";
     }
 
+    const deleteContact = async () => {
+        try {
+            const res = await fetch(`http://localhost:4000/api/contact/delete_contact?id=${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+            });
+            const response = await res.json();
+            console.log(response);
+            if (response.message === 'Contact deleted successfully') {
+                alert(response.message);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const deleteThis = (e) => {
-        e.preventDefault();
         console.log(id);
+        e.preventDefault();
+        deleteContact();
+        // async function deleteContact(id) {
+        //     console.log('triggered');
+        //     const res = await fetch(`http://localhost:4000/api/contact/delete_contact?id=${id}`, {
+        //         method: 'DELETE',
+        //         headers {
+        //             "Content-type": "application/json"
+        //         }
+        //     });
+        //     res.status === 200 ? alert('Contact deleted') : alert('Error deleting contact');
+        //     console.log(res.status);
+        // }
     };
 
     return (
