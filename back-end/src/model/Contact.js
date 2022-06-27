@@ -3,22 +3,22 @@ const mongoose = require('mongoose');
 const contactSchema = new mongoose.Schema({
     fullName: {
         type: String,
-        required: true,
+        required: false,
         max: 255,
     },
     phoneNumber: {
         type: String,
-        required: true,
+        required: false,
         max: 255,
     },
     relationshipStatus: {
         type: Number,
-        required: true,
+        required: false,
         max: 1024,
     },
     email: {
         type: String,
-        required: true,
+        required: false,
         max: 1024,
     },
     location: {

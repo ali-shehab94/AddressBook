@@ -6,7 +6,7 @@ async function addContact(req, res) {
     try {
         const newContact = await addContactService(req.body);
 
-        const updateUser = await User.updateOne(
+        const addToUser = await User.updateOne(
             {
                 _id: newContact.user,
             },
@@ -39,13 +39,15 @@ async function getContacts(req, res) {
 async function deleteContact(req, res) {
     try {
         const contact = await Contact.findOne({ _id: req.query.id });
-        if (!contact) console.log(404);
+        if (!contact) {
+            return res.send({ message: 'Contact does not exist in database' });
+        }
 
         const deleteResult = await contact.remove();
 
         await User.updateOne({ _id: contact.user }, { $pull: { contacts: contact._id } });
 
-        return res.send('Contact removed');
+        return res.send({ message: 'Contact deleted successfully' });
     } catch (error) {
         console.log(error);
     }
@@ -57,10 +59,10 @@ async function updateContact(req, res) {
             { _id: req.query.id },
             {
                 $set: {
-                    full_name: req.body.full_name,
+                    fullName: req.body.fullName,
                     email: req.body.email,
-                    phone: req.body.phone_number,
-                    relationship_status: req.body.relationship_status,
+                    phoneNumber: req.body.phoneNumber,
+                    relationshipStatus: req.body.relationshipStatus,
                     location: req.body.location,
                 },
             }
