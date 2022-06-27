@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import SearchBar from '../components/SearchBar';
 import Card from '../components/Card';
 import { useNavigate } from 'react-router-dom';
 const Homepage = () => {
@@ -8,6 +7,7 @@ const Homepage = () => {
     const userName = localStorage.getItem('userName');
     const navigate = useNavigate();
     const [contacts, setContacts] = useState([]);
+    const [search, setSearch] = useState([]);
 
     const getContacts = async () => {
         const res = await fetch(`http://localhost:4000/api/contact/get_contacts?id=${userId}`);
@@ -15,20 +15,32 @@ const Homepage = () => {
         return data;
     };
 
+    const getData = async () => {
+        const fetchedContacts = await getContacts();
+        setContacts(fetchedContacts);
+    };
+
     useEffect(() => {
-        const getData = async () => {
-            const fetchedContacts = await getContacts();
-            setContacts(fetchedContacts);
-        };
         getData();
     }, []);
 
-    console.log('contacts =>', contacts);
+    const handleSearch = (e) => {
+        let value = e.target.value.toLowerCase();
+        console.log(value);
+        let results = [];
+        results = search.filter((contacts) => {
+            return contacts.fullName.search(value) != -1 || contacts.phoneNumber.search(value) != -1 || contacts.email.search(value) != -1;
+        });
+        setContacts(results);
+    };
+
     return (
         <div>
             <Header userName={userName} pageTitle='Your Contacts' />
             <div className='body-wrapper'>
-                <SearchBar />
+                <div className='search'>
+                    <input className='search-bar' type='text' placeholder='Search' onChange={(e) => handleSearch(e)} />
+                </div>
                 <h1>hi</h1>
                 <h2>isdvicsndiv</h2>
                 <div className='card-container'>

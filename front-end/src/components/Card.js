@@ -1,5 +1,7 @@
+import React from 'react';
 import Button from './Button';
 import { FaPhone, FaMailBulk, FaHeart, FaLocationArrow } from 'react-icons/fa';
+import getData from '../pages/Homepage';
 const Card = ({ name, phone, email, relationship, location, id }) => {
     if (relationship === 0) {
         relationship = 'Single';
@@ -30,17 +32,6 @@ const Card = ({ name, phone, email, relationship, location, id }) => {
         console.log(id);
         e.preventDefault();
         deleteContact();
-        // async function deleteContact(id) {
-        //     console.log('triggered');
-        //     const res = await fetch(`http://localhost:4000/api/contact/delete_contact?id=${id}`, {
-        //         method: 'DELETE',
-        //         headers {
-        //             "Content-type": "application/json"
-        //         }
-        //     });
-        //     res.status === 200 ? alert('Contact deleted') : alert('Error deleting contact');
-        //     console.log(res.status);
-        // }
     };
 
     return (
