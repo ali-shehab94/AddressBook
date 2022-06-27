@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Card from '../components/Card';
+import Map from '../components/Map';
 import { useNavigate } from 'react-router-dom';
 const Homepage = () => {
     const userId = localStorage.getItem('userId');
@@ -18,6 +19,7 @@ const Homepage = () => {
     const getData = async () => {
         const fetchedContacts = await getContacts();
         setContacts(fetchedContacts);
+        setSearch(fetchedContacts);
     };
 
     useEffect(() => {
